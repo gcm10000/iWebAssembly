@@ -16,4 +16,6 @@ function SendMessage(user, message)
     connection.invoke("SendMessage", user, message).catch(function (err) {
         return console.error(err.toString());
     });
+    event.preventDefault();
+
 }
