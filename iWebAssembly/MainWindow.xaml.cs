@@ -32,13 +32,13 @@ namespace iWebAssembly
             InitializeComponent();
             Helper.SetLastVersionIE(this.webBrowser);
 
-            CreateWebHostBuilder(new string[1]).Build().Run();
+            CreateWebHostBuilder().Build().Run();
 
         }
 
-        private IWebHostBuilder CreateWebHostBuilder(string[] args)
+        private IWebHostBuilder CreateWebHostBuilder()
         {
-            return WebHost.CreateDefaultBuilder(args).UseStartup<StartUp>();
+            return WebHost.CreateDefaultBuilder().UseStartup<StartUp>();
         }
         public class StartUp
         {
