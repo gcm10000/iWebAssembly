@@ -12,6 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Internal;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace iWebAssembly
 {
@@ -25,6 +32,30 @@ namespace iWebAssembly
             InitializeComponent();
             Helper.SetLastVersionIE(this.webBrowser);
 
+            CreateWebHostBuilder(new string[1]).Build().Run();
+
+        }
+
+        private IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args).UseStartup<StartUp>();
+        }
+        public class StartUp
+        {
+            public IConfiguration Configuration { get; set; }
+
+            public void ConfigurationServices(IServiceCollection services)
+            {
+                services.AddSignalR();
+            }
+            public void Configure(IApplicationBuilder app)
+            {
+                app.UseRouting();
+                app.UseEndpoints(endpoints => 
+                {
+                    endpoints.MapHub<SocketHub>("/SocketHub");
+                });
+            }
         }
     }
 }
