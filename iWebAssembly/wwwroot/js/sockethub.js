@@ -1,5 +1,5 @@
 ﻿"use strict"
-var connection = new signalR.HubConnectionBuilder().withUrl("/SocketHub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5000/sockethub", { skipNegotiation: true, transport: signalR.HttpTransportType.WebSockets  }).build();
 
 connection.on("ReceiveMessage", function (user, message)
 {
@@ -16,6 +16,5 @@ function SendMessage(user, message)
     connection.invoke("SendMessage", user, message).catch(function (err) {
         return console.error(err.toString());
     });
-    event.preventDefault();
 
 }
