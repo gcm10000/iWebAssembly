@@ -32,7 +32,7 @@ namespace iWebAssembly
             InitializeComponent();
             Helper.SetLastVersionIE(this.webBrowser);
 
-            CreateWebHostBuilder().Build().Run();
+            Task.Run(() => CreateWebHostBuilder().Build().Run());
 
         }
 
@@ -42,9 +42,13 @@ namespace iWebAssembly
         }
         public class StartUp
         {
-            public IConfiguration Configuration { get; set; }
+            public IConfiguration Configuration { get; }
+            public StartUp(IConfiguration Configuration)
+            {
+                this.Configuration = Configuration;
+            }
 
-            public void ConfigurationServices(IServiceCollection services)
+            public void ConfigureServices(IServiceCollection services)
             {
                 services.AddSignalR();
             }
