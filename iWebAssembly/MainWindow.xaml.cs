@@ -23,6 +23,8 @@ namespace iWebAssembly
         public MainWindow()
         {
             InitializeComponent();
+            Helper.SetLastVersionIE(this.webBrowser);
+
         }
     }
 }
