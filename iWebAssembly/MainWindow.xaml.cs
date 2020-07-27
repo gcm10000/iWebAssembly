@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 //using Microsoft.AspNetCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 
 namespace iWebAssembly
@@ -36,16 +37,13 @@ namespace iWebAssembly
             Task.Run(() => 
             {
                 var webHost = CreateWebHostBuilder().Build();
-                var addresses = webHost.ServerFeatures.Get<IServerAddressesFeature>().Addresses;
-                foreach (var address in addresses)
-                {
-                    MessageBox.Show(address);
-                }
-
                 webHost.Run();
-
             });
+            //webBrowser.ObjectForScripting
 
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var path = System.IO.Path.Combine(currentDirectory, "wwwroot", "index.html");
+            this.webBrowser.Navigate(path);
         }
 
         private IWebHostBuilder CreateWebHostBuilder()

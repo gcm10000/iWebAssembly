@@ -25,7 +25,7 @@ namespace iWebAssembly
                 RegVal = 8888;
             else
                 RegVal = 7000;
-            System.Windows.MessageBox.Show(BrowserVer.ToString());
+            //System.Windows.MessageBox.Show(BrowserVer.ToString());
 
             // set the actual key
             using (RegistryKey Key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION", RegistryKeyPermissionCheck.ReadWriteSubTree))
