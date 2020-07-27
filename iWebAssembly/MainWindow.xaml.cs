@@ -15,7 +15,8 @@ using System.Windows.Shapes;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Internal;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+//using Microsoft.AspNetCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,7 +33,18 @@ namespace iWebAssembly
             InitializeComponent();
             Helper.SetLastVersionIE(this.webBrowser);
 
-            Task.Run(() => CreateWebHostBuilder().Build().Run());
+            Task.Run(() => 
+            {
+                var webHost = CreateWebHostBuilder().Build();
+                var addresses = webHost.ServerFeatures.Get<IServerAddressesFeature>().Addresses;
+                foreach (var address in addresses)
+                {
+                    MessageBox.Show(address);
+                }
+
+                webHost.Run();
+
+            });
 
         }
 
@@ -46,6 +58,8 @@ namespace iWebAssembly
             public StartUp(IConfiguration Configuration)
             {
                 this.Configuration = Configuration;
+                var url = Configuration[WebHostDefaults.ServerUrlsKey];
+
             }
 
             public void ConfigureServices(IServiceCollection services)
@@ -59,6 +73,7 @@ namespace iWebAssembly
                 {
                     endpoints.MapHub<SocketHub>("/SocketHub");
                 });
+
             }
         }
     }
