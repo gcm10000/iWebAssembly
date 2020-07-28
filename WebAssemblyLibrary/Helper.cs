@@ -7,12 +7,11 @@ namespace iWebAssembly
 {
     public static class Helper
     {
-        public static void SetLastVersionIE(System.Windows.Controls.WebBrowser Wb)
+        public static void SetLastVersionIE()
         {
             int BrowserVer, RegVal;
 
             // get the installed IE version
-            using (Wb = new System.Windows.Controls.WebBrowser())
                 BrowserVer = Helper.GetInternetExplorerVersion();
             // set the appropriate IE version
             if (BrowserVer >= 11)
@@ -25,7 +24,6 @@ namespace iWebAssembly
                 RegVal = 8888;
             else
                 RegVal = 7000;
-            System.Windows.MessageBox.Show(BrowserVer.ToString());
 
             // set the actual key
             using (RegistryKey Key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION", RegistryKeyPermissionCheck.ReadWriteSubTree))

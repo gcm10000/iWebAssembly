@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +10,7 @@ namespace WebAssemblyLibrary
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public StartUp(IConfiguration Configuration)
+        public Startup(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
         }
