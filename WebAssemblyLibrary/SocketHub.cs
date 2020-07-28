@@ -5,7 +5,7 @@ namespace WebAssemblyLibrary
 {
     class SocketHub : Hub
     {
-        public async Task SendMessage(string window, string data)
+        public async Task SendMessage(string window, object data)
         {
             await Clients.All.SendAsync("ReceiveMessage", window, data);
         }
