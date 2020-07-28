@@ -1,9 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace iWebAssembly
+namespace WebAssemblyLibrary
 {
     public static class Helper
     {
