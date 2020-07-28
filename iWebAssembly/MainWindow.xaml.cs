@@ -32,47 +32,16 @@ namespace iWebAssembly
         public MainWindow()
         {
             InitializeComponent();
-            Helper.SetLastVersionIE(this.webBrowser);
+            WebAssemblyLibrary.Helper.SetLastVersionIE();
 
             Task.Run(() => 
             {
-                var webHost = CreateWebHostBuilder().Build();
-                webHost.Run();
+                WebAssemblyLibrary.WebAssembly.CreateWebHostBuilder().Build().Run();
             });
-            //webBrowser.ObjectForScripting
 
             var currentDirectory = Directory.GetCurrentDirectory();
             var path = System.IO.Path.Combine(currentDirectory, "wwwroot", "index.html");
             this.webBrowser.Navigate(path);
-        }
-
-        private IWebHostBuilder CreateWebHostBuilder()
-        {
-            return WebHost.CreateDefaultBuilder().UseStartup<StartUp>();
-        }
-        public class StartUp
-        {
-            public IConfiguration Configuration { get; }
-            public StartUp(IConfiguration Configuration)
-            {
-                this.Configuration = Configuration;
-                var url = Configuration[WebHostDefaults.ServerUrlsKey];
-
-            }
-
-            public void ConfigureServices(IServiceCollection services)
-            {
-                services.AddSignalR();
-            }
-            public void Configure(IApplicationBuilder app)
-            {
-                app.UseRouting();
-                app.UseEndpoints(endpoints => 
-                {
-                    endpoints.MapHub<SocketHub>("/SocketHub");
-                });
-
-            }
         }
     }
 }

@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebAssemblyLibrary\WebAssemblyLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="wwwroot\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
