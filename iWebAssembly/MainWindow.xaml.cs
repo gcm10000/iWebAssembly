@@ -32,7 +32,7 @@ namespace iWebAssembly
         public MainWindow()
         {
             InitializeComponent();
-            Helper.SetLastVersionIE(this.webBrowser);
+            WebAssemblyLibrary.Helper.SetLastVersionIE();
 
             Task.Run(() => 
             {
