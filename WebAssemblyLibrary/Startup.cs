@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +23,10 @@ namespace WebAssemblyLibrary
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<SocketHub>("/SocketHub");
+                endpoints.MapGet("/", async context => 
+                {
+                    await context.Response.WriteAsync("Hello world!");
+                });
             });
         }
     }
